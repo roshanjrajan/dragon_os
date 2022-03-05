@@ -13,10 +13,8 @@ pub extern "C" fn _start() -> ! {
 
     dragon_os::init();
 
-    #[cfg(test)]
-    test_main();
-
-    panic!();
+    println!("It did not crash!");
+    dragon_os::hlt_loop();
 }
 
 /// This function is called on panic.
@@ -24,7 +22,7 @@ pub extern "C" fn _start() -> ! {
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    dragon_os::hlt_loop();
 }
 
 #[cfg(test)]
